@@ -1,0 +1,43 @@
+server:
+  port: 9191
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dailyeconomicflow
+    username: root
+    password: root
+  thymeleaf:
+    prefix: classpath:/templates/  #classpath:指向的是是springboot项目下的resource目录，classpath:/templates/下放的是前端的html5静态页面
+    suffix: .html
+    mode: HTML5
+    encoding: utf-8
+    cache: false
+    mvc:
+      static-path-pattern: /static/**
+#配置mapper的映射文件的位置
+mybatis:
+  mapper-locations: classpath:mappers/*Mapper.xml
+#热部署模块
+#devtools:
+#  restart:
+#  #热部署开关
+#  enabled: false
+#  #指定热部署的目录
+#  additional-paths: src/main/java
+#  #指定目录不更新
+#  exclude: test/**
+servlet:
+  multipart:
+    max-file-size: 30MB  #设置上传文件的大小
+    max-request-size: 30MB
+# log配置
+logging:
+  level:
+    # 下方的路径填写的是mapper接口所在的全限定包名
+    com.example.dailyeconomicflow.dao : debug
+
+
+
+
+
+

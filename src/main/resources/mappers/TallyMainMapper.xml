@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dailyeconomicflow.dao.TallyMainMapper">
+    <resultMap id="BaseResultMap" type="com.example.dailyeconomicflow.pojo.TallyMain" >
+        <result column="id" property="id" />
+        <result column="trading_time" property="tradingTime" />
+        <result column="trading_source" property="tradingSource" />
+        <result column="collect_or_branch" property="collectOrBranch" />
+        <result column="state_payment" property="statePayment" />
+        <result column="trading_type" property="tradingType" />
+        <result column="trading_other" property="tradingOther" />
+        <result column="trading_commodity" property="tradingCommodity" />
+        <result column="trading_money" property="tradingMoney" />
+        <result column="plus_or_minus" property="plusOrMinus" />
+        <result column="is_need" property="isNeed" />
+        <result column="amount_after_money" property="amountAfterMoney" />
+        <result column="trading_detail_type" property="tradingDetailType" />
+        <result column="trading_more_detail_type" property="tradingMoreDetailType" />
+        <result column="crt_inst" property="crtInst" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="del_ind" property="delInd" />
+        <result column="version" property="version" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        trading_time,
+        trading_source,
+        collect_or_branch,
+        state_payment,
+        trading_type,
+        trading_other,
+        trading_commodity,
+        trading_money,
+        plus_or_minus,
+        is_need,
+        amount_after_money,
+        trading_detail_type,
+        trading_more_detail_type,
+        crt_inst,
+        create_time,
+        create_user,
+        update_time,
+        update_user,
+        del_ind,
+        version
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.example.dailyeconomicflow.pojo.TallyMain">
+        INSERT INTO tally_main
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != tradingTime and '' != tradingTime">
+                trading_time,
+            </if>
+            <if test="null != tradingSource and '' != tradingSource">
+                trading_source,
+            </if>
+            <if test="null != collectOrBranch and '' != collectOrBranch">
+                collect_or_branch,
+            </if>
+            <if test="null != statePayment and '' != statePayment">
+                state_payment,
+            </if>
+            <if test="null != tradingType and '' != tradingType">
+                trading_type,
+            </if>
+            <if test="null != tradingOther and '' != tradingOther">
+                trading_other,
+            </if>
+            <if test="null != tradingCommodity and '' != tradingCommodity">
+                trading_commodity,
+            </if>
+            <if test="null != tradingMoney and '' != tradingMoney">
+                trading_money,
+            </if>
+            <if test="null != plusOrMinus and '' != plusOrMinus">
+                plus_or_minus,
+            </if>
+            <if test="null != isNeed and '' != isNeed">
+                is_need,
+            </if>
+            <if test="null != amountAfterMoney and '' != amountAfterMoney">
+                amount_after_money,
+            </if>
+            <if test="null != tradingDetailType and '' != tradingDetailType">
+                trading_detail_type,
+            </if>
+            <if test="null != tradingMoreDetailType and '' != tradingMoreDetailType">
+                trading_more_detail_type,
+            </if>
+            <if test="null != crtInst and '' != crtInst">
+                crt_inst,
+            </if>
+            <if test="null != createTime and '' != createTime">
+                create_time,
+            </if>
+            <if test="null != createUser and '' != createUser">
+                create_user,
+            </if>
+            <if test="null != updateTime and '' != updateTime">
+                update_time,
+            </if>
+            <if test="null != updateUser and '' != updateUser">
+                update_user,
+            </if>
+            <if test="null != delInd and '' != delInd">
+                del_ind,
+            </if>
+            <if test="null != version and '' != version">
+                version
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != tradingTime and '' != tradingTime">
+                #{tradingTime},
+            </if>
+            <if test="null != tradingSource and '' != tradingSource">
+                #{tradingSource},
+            </if>
+            <if test="null != collectOrBranch and '' != collectOrBranch">
+                #{collectOrBranch},
+            </if>
+            <if test="null != statePayment and '' != statePayment">
+                #{statePayment},
+            </if>
+            <if test="null != tradingType and '' != tradingType">
+                #{tradingType},
+            </if>
+            <if test="null != tradingOther and '' != tradingOther">
+                #{tradingOther},
+            </if>
+            <if test="null != tradingCommodity and '' != tradingCommodity">
+                #{tradingCommodity},
+            </if>
+            <if test="null != tradingMoney and '' != tradingMoney">
+                #{tradingMoney},
+            </if>
+            <if test="null != plusOrMinus and '' != plusOrMinus">
+                #{plusOrMinus},
+            </if>
+            <if test="null != isNeed and '' != isNeed">
+                #{isNeed},
+            </if>
+            <if test="null != amountAfterMoney and '' != amountAfterMoney">
+                #{amountAfterMoney},
+            </if>
+            <if test="null != tradingDetailType and '' != tradingDetailType">
+                #{tradingDetailType},
+            </if>
+            <if test="null != tradingMoreDetailType and '' != tradingMoreDetailType">
+                #{tradingMoreDetailType},
+            </if>
+            <if test="null != crtInst and '' != crtInst">
+                #{crtInst},
+            </if>
+            <if test="null != createTime and '' != createTime">
+                #{createTime},
+            </if>
+            <if test="null != createUser and '' != createUser">
+                #{createUser},
+            </if>
+            <if test="null != updateTime and '' != updateTime">
+                #{updateTime},
+            </if>
+            <if test="null != updateUser and '' != updateUser">
+                #{updateUser},
+            </if>
+            <if test="null != delInd and '' != delInd">
+                #{delInd},
+            </if>
+            <if test="null != version and '' != version">
+                #{version}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" >
+        DELETE FROM tally_main
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.example.dailyeconomicflow.pojo.TallyMain">
+        UPDATE tally_main
+        <set>
+            <if test="null != tradingTime and '' != tradingTime">trading_time = #{tradingTime},</if>
+            <if test="null != tradingSource and '' != tradingSource">trading_source = #{tradingSource},</if>
+            <if test="null != collectOrBranch and '' != collectOrBranch">collect_or_branch = #{collectOrBranch},</if>
+            <if test="null != statePayment and '' != statePayment">state_payment = #{statePayment},</if>
+            <if test="null != tradingType and '' != tradingType">trading_type = #{tradingType},</if>
+            <if test="null != tradingOther and '' != tradingOther">trading_other = #{tradingOther},</if>
+            <if test="null != tradingCommodity and '' != tradingCommodity">trading_commodity = #{tradingCommodity},</if>
+            <if test="null != tradingMoney and '' != tradingMoney">trading_money = #{tradingMoney},</if>
+            <if test="null != plusOrMinus and '' != plusOrMinus">plus_or_minus = #{plusOrMinus},</if>
+            <if test="null != isNeed and '' != isNeed">is_need = #{isNeed},</if>
+            <if test="null != amountAfterMoney and '' != amountAfterMoney">amount_after_money = #{amountAfterMoney},</if>
+            <if test="null != tradingDetailType and '' != tradingDetailType">trading_detail_type = #{tradingDetailType},</if>
+            <if test="null != tradingMoreDetailType and '' != tradingMoreDetailType">trading_more_detail_type = #{tradingMoreDetailType},</if>
+            <if test="null != crtInst and '' != crtInst">crt_inst = #{crtInst},</if>
+            <if test="null != createTime and '' != createTime">create_time = #{createTime},</if>
+            <if test="null != createUser and '' != createUser">create_user = #{createUser},</if>
+            <if test="null != updateTime and '' != updateTime">update_time = #{updateTime},</if>
+            <if test="null != updateUser and '' != updateUser">update_user = #{updateUser},</if>
+            <if test="null != delInd and '' != delInd">del_ind = #{delInd},</if>
+            <if test="null != version and '' != version">version = #{version}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="load" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tally_main
+        WHERE id = #{id}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM tally_main
+        LIMIT #{offset}, #{pagesize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM tally_main
+    </select>
+
+    <insert id="addTallyMain" parameterType="java.util.List">
+        insert into tally_main(
+        trading_time,
+        trading_source,
+        collect_or_branch,
+        state_payment,
+        trading_type,
+        trading_other,
+        trading_commodity,
+        trading_money,
+        plus_or_minus,
+        is_need,
+        amount_after_money,
+        trading_detail_type) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.tradingTime,jdbcType=TIMESTAMP},
+            #{item.tradingSource, jdbcType=VARCHAR},
+            #{item.collectOrBranch, jdbcType=VARCHAR},
+            #{item.statePayment, jdbcType=VARCHAR},
+            #{item.tradingType, jdbcType=VARCHAR},
+            #{item.tradingOther, jdbcType=VARCHAR},
+            #{item.tradingCommodity, jdbcType=VARCHAR},
+            #{item.tradingMoney, jdbcType=DECIMAL},
+            #{item.plusOrMinus, jdbcType=INTEGER},
+            #{item.isNeed, jdbcType=INTEGER},
+            #{item.amountAfterMoney, jdbcType=DECIMAL},
+            #{item.tradingDetailType, jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.dailyeconomicflow.dao.CategorysMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.dailyeconomicflow.pojo.Categorys" >
+        <result column="id" property="id" />
+        <result column="category_name" property="categoryName" />
+        <result column="icon_class_name" property="iconClassName" />
+        <result column="record_type" property="recordType" />
+        <result column="crt_inst" property="crtInst" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="del_ind" property="delInd" />
+        <result column="version" property="version" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        category_name,
+        icon_class_name,
+        record_type,
+        crt_inst,
+        create_time,
+        create_user,
+        update_time,
+        update_user,
+        del_ind,
+        version
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.example.dailyeconomicflow.pojo.Categorys">
+        INSERT INTO category_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != categoryName and '' != categoryName">
+                category_name,
+            </if>
+            <if test="null != iconClassName and '' != iconClassName">
+                icon_class_name,
+            </if>
+            <if test="null != recordType ">
+                record_type,
+            </if>
+            <if test="null != crtInst and '' != crtInst">
+                crt_inst,
+            </if>
+            <if test="null != createTime and '' != createTime">
+                create_time,
+            </if>
+            <if test="null != createUser and '' != createUser">
+                create_user,
+            </if>
+            <if test="null != updateTime and '' != updateTime">
+                update_time,
+            </if>
+            <if test="null != updateUser and '' != updateUser">
+                update_user,
+            </if>
+            <if test="null != delInd and '' != delInd">
+                del_ind,
+            </if>
+            <if test="null != version and '' != version">
+                version
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null != categoryName and '' != categoryName">
+                #{categoryName},
+            </if>
+            <if test="null != iconClassName and '' != iconClassName">
+                #{iconClassName},
+            </if>
+            <if test="null != recordType ">
+                #{recordType},
+            </if>
+            <if test="null != crtInst and '' != crtInst">
+                #{crtInst},
+            </if>
+            <if test="null != createTime and '' != createTime">
+                #{createTime},
+            </if>
+            <if test="null != createUser and '' != createUser">
+                #{createUser},
+            </if>
+            <if test="null != updateTime and '' != updateTime">
+                #{updateTime},
+            </if>
+            <if test="null != updateUser and '' != updateUser">
+                #{updateUser},
+            </if>
+            <if test="null != delInd and '' != delInd">
+                #{delInd},
+            </if>
+            <if test="null != version and '' != version">
+                #{version}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete" >
+        DELETE FROM category_table
+        WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.example.dailyeconomicflow.pojo.Categorys">
+        UPDATE category_table
+        <set>
+            <if test="null != categoryName and '' != categoryName">category_name = #{categoryName},</if>
+            <if test="null != iconClassName and '' != iconClassName">icon_class_name = #{iconClassName},</if>
+            <if test="null != recordType and '' != recordType">record_type = #{recordType},</if>
+            <if test="null != crtInst and '' != crtInst">crt_inst = #{crtInst},</if>
+            <if test="null != createTime and '' != createTime">create_time = #{createTime},</if>
+            <if test="null != createUser and '' != createUser">create_user = #{createUser},</if>
+            <if test="null != updateTime and '' != updateTime">update_time = #{updateTime},</if>
+            <if test="null != updateUser and '' != updateUser">update_user = #{updateUser},</if>
+            <if test="null != delInd and '' != delInd">del_ind = #{delInd},</if>
+            <if test="null != version and '' != version">version = #{version}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="load" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM category_table
+        WHERE id = #{id}
+    </select>
+
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM category_table
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="pageListCount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM category_table
+    </select>
+
+    <select id="pageListWithParamList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM category_table
+        WHERE record_type = #{recordType}
+    </select>
+
+</mapper>
