@@ -6,6 +6,7 @@ import com.example.dailyeconomicflow.service.TallyMainService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,4 +64,18 @@ public class TallyMainServiceImpl implements TallyMainService {
         return result;
     }
 
+
+    @Override
+    public Map<String,Object> getAmountList(int porm, int recordYear, int recordMonth) {
+        String selectDate = recordYear+"-"+recordMonth+"-01";
+        List<TallyMain> getAmountList = tallyMainMapper.getAmountList(porm,selectDate);
+        //统计总金额
+        BigDecimal Amount = BigDecimal.ZERO;
+        for (TallyMain tallyMain : getAmountList) {
+            Amount = Amount.add(tallyMain.getTradingMoney());
+        }
+        Map<String,Object> result = new HashMap<>();
+        result.put("Amount",Amount);
+        return result;
+    }
 }

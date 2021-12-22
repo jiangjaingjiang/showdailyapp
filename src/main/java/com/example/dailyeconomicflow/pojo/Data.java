@@ -8,16 +8,16 @@ public class Data {
     //总数
     private Integer count;
     //详细数据
-    private List<Categorys> Categorys;
+    private List<Categorys> categoryList;
     //总支出
     private BigDecimal payAmount;
     //总收入
     private BigDecimal incomeAmount;
 
-    public Data(Integer count, List<Categorys> Categorys ,
+    public Data(Integer count, List<Categorys> categoryList ,
                 BigDecimal payAmount,BigDecimal incomeAmount) {
         this.count = count;
-        this.Categorys = Categorys;
+        this.categoryList = categoryList;
         this.payAmount = payAmount;
         this.incomeAmount = incomeAmount;
 
@@ -36,14 +36,14 @@ public class Data {
         this.count = count;
     }
 
-    public List<Categorys> getCategorys() {
+    public List<Categorys> getCategoryList() {
 
-        return Categorys;
+        return categoryList;
     }
 
-    public void setCategorys(List<Categorys> Categorys) {
+    public void setCategoryList(List<Categorys> categoryList) {
 
-        this.Categorys = Categorys;
+        this.categoryList = categoryList;
     }
 
     public BigDecimal getPayAmount(){
@@ -68,7 +68,7 @@ public class Data {
     public String toString() {
         return "Data{" +
                 "count=" + count +
-                ", Category='" + Categorys +
+                ", Category='" + categoryList +
                 ", payAmount='" + payAmount +
                 ", incomeAmount='" + incomeAmount +
                 '}';

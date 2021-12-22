@@ -2,6 +2,7 @@ package com.example.dailyeconomicflow.service;
 
 import com.example.dailyeconomicflow.pojo.TallyMain;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,5 +36,10 @@ public interface TallyMainService {
      * 分页查询
      */
     public Map<String,Object> pageList(int offset, int pagesize);
+
+    /**
+     * 查询月份总数
+     */
+    public Map<String,Object> getAmountList (int porm,int recordYear,int recordMonth);
 
 }

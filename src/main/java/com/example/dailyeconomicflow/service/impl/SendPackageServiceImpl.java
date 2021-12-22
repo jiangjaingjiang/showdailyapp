@@ -1,25 +1,26 @@
 package com.example.dailyeconomicflow.service.impl;
 
-import com.example.dailyeconomicflow.pojo.Category;
-import com.example.dailyeconomicflow.pojo.Categorys;
-import com.example.dailyeconomicflow.pojo.CrossDomainInfo;
-import com.example.dailyeconomicflow.pojo.Data;
+import com.example.dailyeconomicflow.pojo.*;
 import com.example.dailyeconomicflow.service.CategorysService;
 import com.example.dailyeconomicflow.service.SendPackageService;
+import com.example.dailyeconomicflow.service.TallyMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SendPackageServiceImpl implements SendPackageService {
     @Autowired
     CategorysService categorysService;
+    @Autowired
+    TallyMainService tallyMainService;
 
     @Override
-    public CrossDomainInfo sendtest(Categorys categorys) {
+    public CrossDomainInfo sendtest(AcceptData acceptData) {
         //测试数据
         CrossDomainInfo crossDomainInfo = new CrossDomainInfo();
         Data data = new Data();
@@ -45,11 +46,11 @@ public class SendPackageServiceImpl implements SendPackageService {
 //        categoryList.add(category2);
         data.setCount(2);
         Integer i = 0;
-        if(categorys.getRecordType()!=null){
-            i = categorys.getRecordType();
+        if(acceptData.getRecordType()!=null){
+            i = acceptData.getRecordType();
         }
         categoryList = categorysService.pageListWithParam(i);
-        data.setCategorys(categoryList);
+        data.setCategoryList(categoryList);
         data.setIncomeAmount(BigDecimal.valueOf(11));
         data.setPayAmount(BigDecimal.valueOf(10));
         //获取后台数据
@@ -87,10 +88,29 @@ public class SendPackageServiceImpl implements SendPackageService {
         //获取返回值
         List<Categorys> categorysList = categorysService.pageListWithParam(recordType);
         Data data = new Data();
-        data.setCategorys(categorysList);
+        data.setCategoryList(categorysList);
         crossDomainInfo.setData(data);
 
         //放入传输的实体内
+        return crossDomainInfo;
+    }
+
+    @Override
+    public CrossDomainInfo getAmount(AcceptData acceptData) {
+        CrossDomainInfo crossDomainInfo = new CrossDomainInfo();
+        Data data = new Data();
+        Integer recordYear = acceptData.getRecordYear();
+        Integer recordMonth = acceptData.getRecordMonth();
+        //拿入参月份和年份去数据库拿支出总数
+        Map<String,Object> resultPay = tallyMainService.getAmountList(-1,recordYear,recordMonth);
+        BigDecimal pay = new BigDecimal(resultPay.get("Amount").toString());
+        //拿入参月份和年份去数据库拿支收入总数
+        Map<String,Object> resultMinus = tallyMainService.getAmountList(1,recordYear,recordMonth);
+        BigDecimal minus = new BigDecimal(resultMinus.get("Amount").toString());
+        //封装传参
+        data.setPayAmount(pay);
+        data.setIncomeAmount(minus);
+        crossDomainInfo.setData(data);
         return crossDomainInfo;
     }
 }
