@@ -262,7 +262,7 @@
         FROM tally_main
         WHERE
         is_need = 1 AND
-        plus_or_minus = #{porm} AND
+        <if test="null != porm and '' != porm">plus_or_minus = #{porm} AND</if>
         DATE_FORMAT(trading_time,'%Y%m') = DATE_FORMAT(#{selectDate},'%Y%m');
     </select>
 

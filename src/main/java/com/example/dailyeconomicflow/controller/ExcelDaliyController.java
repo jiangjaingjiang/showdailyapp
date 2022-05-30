@@ -20,5 +20,6 @@ public class ExcelDaliyController {
         ReturnInfo ReturnInfo = excelDaliyService.getExcelInfos(fileName,file);
         model.addAttribute("retInfo",ReturnInfo);
         return "infoz";
+
     }
 }

@@ -13,11 +13,11 @@ public class SendPackageController {
     @Autowired
     SendPackageService sendPackageService;
 
-    @RequestMapping("/shendteset")
+    @RequestMapping("/getAccountingList")
     public CrossDomainInfo sendTest(@RequestBody AcceptData acceptData){
         CrossDomainInfo crossDomainInfo = new CrossDomainInfo();
 
-        crossDomainInfo = sendPackageService.sendtest(acceptData);
+        crossDomainInfo = sendPackageService.getAccountingList(acceptData);
         return crossDomainInfo;
     }
     //新增记账类别

@@ -1,9 +1,7 @@
 package com.example.dailyeconomicflow.service.impl;
 
 import com.example.dailyeconomicflow.pojo.*;
-import com.example.dailyeconomicflow.service.CategorysService;
-import com.example.dailyeconomicflow.service.SendPackageService;
-import com.example.dailyeconomicflow.service.TallyMainService;
+import com.example.dailyeconomicflow.service.SendChartsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +10,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * @Title:
+ * @Description:
+ * @Param:
+ * @Return:
+ * @Author: ZengJT
+ * @Updatedate: 2022/1/13 14:23
+ */
 @Service
-public class SendPackageServiceImpl implements SendPackageService {
+public class SendChartsServiceImpl implements SendChartsService {
     @Autowired
-    CategorysService categorysService;
-    @Autowired
-    TallyMainService tallyMainService;
-
+    TallyMainServiceImpl tallyMainService;
     @Override
-    public CrossDomainInfo getAccountingList(AcceptData acceptData) {
+    public CrossDomainInfo getChartDataByYearAndMonth(AcceptData acceptData) {
+        //创建返回的实体
         CrossDomainInfo crossDomainInfo = new CrossDomainInfo();
         Data data = new Data();
         List<Acc> accList = new ArrayList<>();
@@ -36,6 +39,9 @@ public class SendPackageServiceImpl implements SendPackageService {
         //对数据进行处理
         for (TallyMain tallyMain: tallyMaintList) {
             List<Content> contentList = new ArrayList<>();
+            //取出这个月的最后一天
+            //设置循环判断到哪一天
+            //把日期等于这一天的支出金额相加
             //处理时间
             Date tradingTimeDate = tallyMain.getTradingTime();
             SimpleDateFormat sdf =new SimpleDateFormat("dd" );
@@ -63,6 +69,7 @@ public class SendPackageServiceImpl implements SendPackageService {
             //清空实体
             acc = new Acc();
             content = new Content();
+            
         }
         //加入总数
         data.setCount(accList.size());
@@ -71,57 +78,6 @@ public class SendPackageServiceImpl implements SendPackageService {
         crossDomainInfo.setData(data);
         crossDomainInfo.setStatus(200);
         crossDomainInfo.setErrMsg("获取成功");
-        return crossDomainInfo;
-    }
-
-    @Override
-    public CrossDomainInfo addCategory(Categorys categorys) {
-        //先建立返回值
-        CrossDomainInfo crossDomainInfo = new CrossDomainInfo();
-        //调用service
-//        Categorys categorys = new Categorys();
-//        categorys.setCategoryName(categoryName);
-//        int i = categorys.getRecordType();
-//        int is = Integer.valueOf(i);
-//        categorys.setRecordType(is);
-//        int is = 0 ;
-//        categorys.setRecordType(is);
-//        categorys.setIconClassName(iconClassName);
-        categorysService.insert(categorys);
-
-        return crossDomainInfo;
-    }
-
-    @Override
-    public CrossDomainInfo getCategoryList(Integer recordType) {
-        CrossDomainInfo crossDomainInfo = new CrossDomainInfo();
-        //获取返回值
-        List<Categorys> categorysList = categorysService.pageListWithParam(recordType);
-        Data data = new Data();
-        data.setCategoryList(categorysList);
-        crossDomainInfo.setData(data);
-
-        //放入传输的实体内
-        return crossDomainInfo;
-    }
-
-    @Override
-    public CrossDomainInfo getAmount(AcceptData acceptData) {
-        CrossDomainInfo crossDomainInfo = new CrossDomainInfo();
-        Data data = new Data();
-        //掏出前端给的数据
-        Integer recordYear = acceptData.getRecordYear();
-        Integer recordMonth = acceptData.getRecordMonth();
-        //拿入参月份和年份去数据库拿支出总数
-        Map<String,Object> resultPay = tallyMainService.getAmountList(-1,recordYear,recordMonth);
-        BigDecimal pay = new BigDecimal(resultPay.get("Amount").toString());
-        //拿入参月份和年份去数据库拿支收入总数
-        Map<String,Object> resultMinus = tallyMainService.getAmountList(1,recordYear,recordMonth);
-        BigDecimal minus = new BigDecimal(resultMinus.get("Amount").toString());
-        //封装传参
-        data.setPayAmount(pay);
-        data.setIncomeAmount(minus);
-        crossDomainInfo.setData(data);
         return crossDomainInfo;
     }
 }

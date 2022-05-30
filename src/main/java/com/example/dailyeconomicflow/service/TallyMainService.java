@@ -41,5 +41,16 @@ public interface TallyMainService {
      * 查询月份总数
      */
     public Map<String,Object> getAmountList (int porm,int recordYear,int recordMonth);
+    /*
+     * @Title:getTallyMaintList
+     * @Description: 查询该月份的所有数据 porm = 0 就是查收入和支出一起
+     * @Param porm:
+     * @Param recordYear:
+     * @Param recordMonth:
+     * @Return: java.util.Map<java.lang.String,java.lang.Object>
+     * @Author: Zengjt
+     * @Date: 2021/12/22 14:52
+     */
+    public List<TallyMain> getTallyMaintList (int porm,int recordYear,int recordMonth);
 
 }

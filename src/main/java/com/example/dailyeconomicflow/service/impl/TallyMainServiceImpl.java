@@ -64,11 +64,19 @@ public class TallyMainServiceImpl implements TallyMainService {
         return result;
     }
 
-
+    /*
+     * @Title:getAmountList
+     * @Description: 查询该月份的所有数据 porm = 0 就是查收入和支出一起
+     * @Param porm:
+     * @Param recordYear:
+     * @Param recordMonth:
+     * @Return: java.util.Map<java.lang.String,java.lang.Object>
+     * @Author: Zengjt
+     * @Date: 2021/12/22 14:52
+     */
     @Override
     public Map<String,Object> getAmountList(int porm, int recordYear, int recordMonth) {
-        String selectDate = recordYear+"-"+recordMonth+"-01";
-        List<TallyMain> getAmountList = tallyMainMapper.getAmountList(porm,selectDate);
+        List<TallyMain> getAmountList = this.getTallyMaintList(porm, recordYear, recordMonth);
         //统计总金额
         BigDecimal Amount = BigDecimal.ZERO;
         for (TallyMain tallyMain : getAmountList) {
@@ -77,5 +85,21 @@ public class TallyMainServiceImpl implements TallyMainService {
         Map<String,Object> result = new HashMap<>();
         result.put("Amount",Amount);
         return result;
+    }
+    /*
+     * @Title:getTallyMaintList
+     * @Description:查询这个年份月份下的数据用
+     * @Param porm:
+     * @Param recordYear:
+     * @Param recordMonth:
+     * @Return: java.util.List<com.example.dailyeconomicflow.pojo.TallyMain>
+     * @Author: Zengjt
+     * @Date: 2022/1/13 14:43
+     */
+    @Override
+    public List<TallyMain> getTallyMaintList(int porm, int recordYear, int recordMonth) {
+        String selectDate = recordYear+"-"+recordMonth+"-01";
+        List<TallyMain> getTallyMaintList = tallyMainMapper.getAmountList(porm,selectDate);
+        return getTallyMaintList;
     }
 }
