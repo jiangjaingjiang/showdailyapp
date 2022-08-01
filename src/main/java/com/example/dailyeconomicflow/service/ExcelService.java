@@ -9,7 +9,7 @@ import java.text.ParseException;
 
 @Service
 public interface ExcelService {
-
+    //把excel的数据到入住数据库
     public ReturnInfo getExcelInfo(String fileName, MultipartFile file) throws IOException, ParseException;
 
 }

@@ -23,8 +23,7 @@ import java.util.List;
 public class SendChartsServiceImpl implements SendChartsService {
     @Autowired
     TallyMainServiceImpl tallyMainService;
-    @Override
-    public CrossDomainInfo getChartDataByYearAndMonth(AcceptData acceptData) {
+    @Override    public CrossDomainInfo getChartDataByYearAndMonth(AcceptData acceptData) {
         //创建返回的实体
         CrossDomainInfo crossDomainInfo = new CrossDomainInfo();
         Data data = new Data();

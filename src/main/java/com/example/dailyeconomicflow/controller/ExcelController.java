@@ -15,6 +15,7 @@ public class ExcelController {
     private ExcelService excelService;
 
     @RequestMapping("/import")
+    //把excel的数据到入住数据库
     public String fileImport(@RequestParam("file") MultipartFile file, Model model) throws Exception {
 
         String fileName = file.getOriginalFilename();
