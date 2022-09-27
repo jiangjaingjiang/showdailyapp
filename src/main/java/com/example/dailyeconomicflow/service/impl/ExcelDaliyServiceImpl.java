@@ -55,7 +55,9 @@ public class ExcelDaliyServiceImpl implements ExcelDaliyService {
         } else {
             wb = new XSSFWorkbook(is);
         }
-        Sheet sheet = wb.getSheetAt(0);
+        //确定要拿哪一个sheet页
+        Sheet sheet = wb.getSheetAt(2);
+        //获取需要插入数据库的数据
         resultList = getSheetVal(sheet, resultCell);
         System.out.println("结果集---"+resultList);
         try{
@@ -91,6 +93,7 @@ public class ExcelDaliyServiceImpl implements ExcelDaliyService {
                     if (i==resultCell[j]){
                         switch (i){
                             case 0:
+                                //账单发生时间
                                 Date tradingTime = ExcelUtil.getDate(row.getCell(i));
                                 tallyMain.setTradingTime(tradingTime);
                                 break;
@@ -128,6 +131,8 @@ public class ExcelDaliyServiceImpl implements ExcelDaliyService {
                                 break;
                             case 11:
                                 BigDecimal amountAfterMoney = ExcelUtil.getBigDecimalCell(row.getCell(i));
+                                //如果是负数转换成正数再进去(方便做图表统计)
+                                amountAfterMoney = negative(amountAfterMoney);
                                 tallyMain.setAmountAfterMoney(amountAfterMoney);
                                 break;
                             case 12:
@@ -144,5 +149,19 @@ public class ExcelDaliyServiceImpl implements ExcelDaliyService {
             tallyMainsList.add(tallyMain);
         }
         return tallyMainsList;
+    }
+
+    /**
+     * 正负转换
+     * @param amountAfterMoney
+     * @return
+     */
+    public  BigDecimal negative (BigDecimal amountAfterMoney){
+        int i = amountAfterMoney.compareTo(BigDecimal.ZERO);
+        //如果比零小的话就是-1
+        if (i == -1) {
+            amountAfterMoney = amountAfterMoney.negate();
+        }
+        return amountAfterMoney;
     }
 }
