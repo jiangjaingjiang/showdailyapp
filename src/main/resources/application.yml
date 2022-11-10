@@ -7,7 +7,8 @@ spring:
     username: root
     password: root
   thymeleaf:
-    prefix: classpath:/templates/  #classpath:指向的是是springboot项目下的resource目录，classpath:/templates/下放的是前端的html5静态页面
+    #classpath:指向的是是springboot项目下的resource目录，classpath:/templates/下放的是前端的html5静态页面
+    prefix: classpath:/templates/
     suffix: .html
     mode: HTML5
     encoding: utf-8
@@ -22,6 +23,7 @@ mybatis:
 #  restart:
 #  #热部署开关
 #  enabled: false
+
 #  #指定热部署的目录
 #  additional-paths: src/main/java
 #  #指定目录不更新
