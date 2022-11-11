@@ -16,7 +16,7 @@ public class ReturnUtil {
         //放入 标识 0 代表成功信息
         returnInfo.setRetFlag(0);
         // 放入默认成功信息
-        returnInfo.setRetMsg("导入成功");
+        returnInfo.setRetMsg("操作成功");
         //成功之后传递的val值
         returnInfo.setRetVal(retVal);
         return returnInfo;

@@ -95,7 +95,20 @@
         <!--            <artifactId>spring-boot-devtools</artifactId>-->
         <!--            <optional>false</optional>-->
         <!--        </dependency>-->
-    </dependencies>
+        <!-- 引用jquery  -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+        <!-- 引用bootstrap -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.7-1</version>
+        </dependency>
+        </dependencies>
+
 
     <build>
         <plugins>

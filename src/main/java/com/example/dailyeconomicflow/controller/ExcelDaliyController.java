@@ -14,12 +14,11 @@ public class ExcelDaliyController {
     @Autowired
     private ExcelDaliyService excelDaliyService;
     @RequestMapping("/importDaliy")
-    public String fileImportDaliy(@RequestParam("file") MultipartFile file, Model model) throws Exception {
+    public ReturnInfo fileImportDaliy(@RequestParam("file") MultipartFile file, Model model) throws Exception {
 
         String fileName = file.getOriginalFilename();
         ReturnInfo ReturnInfo = excelDaliyService.getExcelInfos(fileName,file);
         model.addAttribute("retInfo",ReturnInfo);
-        return "infoz";
-
+        return ReturnInfo;
     }
 }

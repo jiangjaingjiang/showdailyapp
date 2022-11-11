@@ -3,9 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=10.0, maximum-scale=10.0, minimum-scale=10.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>文档导入数据操作中心</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+  <script src="/webjars/jquery/3.6.1/jquery.min.js"></script>
+  <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    function queren()
+    {
+      var se=confirm("请确认是否需要手动备份表格,导入时会自动备份一份数据,请不要随便按造成数据冗余");
+      if (se==true)
+      {
+        alert("开始备份");
+        //
+        $.ajax({
+          type: "post",
+          url: "/PublicTool/backupsTool",
+          contentType: "application/json; charset= utf-8",
+          data: '{"name":"小黑", "age":20, "hobby":"basketball"}',
+          dataType: "json",
+          success:function(data){
+            alert(data);
+          }
+        });
+        //
+
+      }
+      else
+      {
+        alert("已取消");
+      }
+    }
+  </script>
 </head>
 <body>
 <form action="/importDaliy" method="post" enctype="multipart/form-data"><!--enctype="multipart/form-data"是必须的-->
@@ -15,5 +45,15 @@
   <input type="file" name="file"><br><br>
   <input type="submit" id="btnSub" value="正式提交">
 </form>
+<br><br>
+
+  <input type="button" id="backupsd" value="手动备份按钮" onclick="queren()" >
+
+<div class="container"><br/>
+  <div class="alert alert-success">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    Hello, <strong>Dalaoyang!</strong>
+  </div>
+</div>
 </body>
 </html>
