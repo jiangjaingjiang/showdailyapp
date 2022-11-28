@@ -23,6 +23,8 @@ public interface PublicToolMapper {
 
     int backupsInsertTool(@Param(value = "tableName") String tableName);
 
+    int clearTableByYearTool(@Param(value = "yearInt") Integer yearInt);
+
 
 
 }

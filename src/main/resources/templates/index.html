@@ -6,11 +6,20 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+    <script src="/webjars/jquery/3.6.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src = "index.js"></script>
 </head>
 <body>
-<form action="/import" method="post" enctype="multipart/form-data"><!--enctype="multipart/form-data"是必须的-->
-    <input type="file" name="file"><br>
-    <input type="submit" id="btnSub" value="测试提交">
-</form>
+
+<div class="container">
+    <br/>
+    <input type="button" value="提示" onclick="showSometing()">
+    <br>
+    <br>
+    <input type="button" value="进入导入功能页面" onclick="jumpTodaliy()">
+</div>
+
 </body>
 </html>

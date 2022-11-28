@@ -4,8 +4,11 @@ import com.example.dailyeconomicflow.pojo.AcceptData;
 import com.example.dailyeconomicflow.pojo.ReturnInfo;
 import com.example.dailyeconomicflow.service.PublicToolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.ManagedArray;
+import org.springframework.beans.factory.support.ManagedProperties;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -33,9 +36,14 @@ public class PublicToolController {
      */
     @RequestMapping("/backupsTool")
     public ReturnInfo backupsTool (@RequestBody Map<String, String> map){
-        ReturnInfo returnInfo = new ReturnInfo();
-        String flag = publicToolService.backupsToolService("1");
-        returnInfo.setRetMsg(flag);
+        ReturnInfo returnInfo = publicToolService.backupsToolService("1");
+        return returnInfo;
+    }
+    @RequestMapping("/clearTableByYear")
+    public ReturnInfo clearTableByYear(@RequestBody Map<String, String> map){
+        String yearSting = map.get("yearNumb");
+        ReturnInfo returnInfo = publicToolService.clearTableByYearToolService(yearSting);
+//        ReturnInfo returnInfo = publicToolService.clearTableByYearToolService(String.valueOf(yearSting));
         return returnInfo;
     }
 }

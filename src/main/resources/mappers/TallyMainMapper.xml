@@ -242,7 +242,8 @@
         amount_after_money,
         trading_detail_type) values
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.tradingTime,jdbcType=TIMESTAMP},
+            (
+             #{item.tradingTime,jdbcType=TIMESTAMP},
             #{item.tradingSource, jdbcType=VARCHAR},
             #{item.collectOrBranch, jdbcType=VARCHAR},
             #{item.statePayment, jdbcType=VARCHAR},
@@ -265,5 +266,56 @@
         <if test="null != porm and '' != porm">plus_or_minus = #{porm} AND</if>
         DATE_FORMAT(trading_time,'%Y%m') = DATE_FORMAT(#{selectDate},'%Y%m');
     </select>
+
+<!--    批量 有则更新无则插入 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true" parameterType="java.util.List">
+        insert into tally_main(
+        id,
+        trading_time,
+        trading_source,
+        collect_or_branch,
+        state_payment,
+        trading_type,
+        trading_other,
+        trading_commodity,
+        trading_money,
+        plus_or_minus,
+        is_need,
+        amount_after_money,
+        trading_detail_type
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.id,jdbcType=BIGINT},
+            #{item.tradingTime,jdbcType=TIMESTAMP},
+            #{item.tradingSource, jdbcType=VARCHAR},
+            #{item.collectOrBranch, jdbcType=VARCHAR},
+            #{item.statePayment, jdbcType=VARCHAR},
+            #{item.tradingType, jdbcType=VARCHAR},
+            #{item.tradingOther, jdbcType=VARCHAR},
+            #{item.tradingCommodity, jdbcType=VARCHAR},
+            #{item.tradingMoney, jdbcType=DECIMAL},
+            #{item.plusOrMinus, jdbcType=INTEGER},
+            #{item.isNeed, jdbcType=INTEGER},
+            #{item.amountAfterMoney, jdbcType=DECIMAL},
+            #{item.tradingDetailType, jdbcType=VARCHAR}
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        id                  = values(id)                ,
+        trading_time        = values(trading_time)      ,
+        trading_source      = values(trading_source)    ,
+        collect_or_branch   = values(collect_or_branch) ,
+        state_payment       = values(state_payment)     ,
+        trading_type        = values(trading_type)      ,
+        trading_other       = values(trading_other)    ,
+        trading_commodity   = values(trading_commodity) ,
+        trading_money       = values(trading_money)     ,
+        plus_or_minus       = values(plus_or_minus)     ,
+        is_need             = values(is_need)           ,
+        amount_after_money  = values(amount_after_money),
+        trading_detail_type = values(trading_detail_type)
+    </insert>
 
 </mapper>

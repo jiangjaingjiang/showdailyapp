@@ -3,20 +3,21 @@ package com.example.dailyeconomicflow.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
 @Entity
 @Table(name ="tally_main")
-public class TallyMain {
+public class TallyMain extends BasePojo implements Serializable {
+
     /**
-     * 记账主表id
+     * 主表id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Integer id;
+    private Long id;
 
     /**
      * 交易时间
@@ -96,47 +97,6 @@ public class TallyMain {
     @Column(name="trading_more_detail_type")
     private String tradingMoreDetailType;
 
-    /**
-     * 创建机构
-     */
-    @Column(name="crt_inst")
-    private String crtInst;
-
-    /**
-     * 创建时间
-     */
-    @Column(name="create_time")
-    private Date createTime;
-
-    /**
-     * 创建人
-     */
-    @Column(name="create_user")
-    private String createUser;
-
-    /**
-     * 更新时间
-     */
-    @Column(name="update_time")
-    private Date updateTime;
-
-    /**
-     * 更新人
-     */
-    @Column(name="update_user")
-    private String updateUser;
-
-    /**
-     * 删除标志（indicator）
-     */
-    @Column(name="del_ind")
-    private String delInd;
-
-    /**
-     * 版本号
-     */
-    @Column(name="version")
-    private Integer version;
 
 //    public void setId(Integer id) {
 //        this.id = id;

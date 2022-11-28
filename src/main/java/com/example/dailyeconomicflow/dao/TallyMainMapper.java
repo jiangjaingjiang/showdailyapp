@@ -68,5 +68,11 @@ public interface TallyMainMapper {
      * @date 2021/12/07
      **/
     List<TallyMain> getAmountList(int porm,String selectDate);
+    /**
+     * 存在就更新不存在就新增
+     * @author zhengkai.blog.csdn.net
+     * @date 2021/12/07
+     **/
+    int insertOrUpdateBatch(List<TallyMain> list);
 
 }

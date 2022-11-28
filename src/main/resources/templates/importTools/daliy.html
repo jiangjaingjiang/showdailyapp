@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=10.0, maximum-scale=10.0, minimum-scale=10.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文档导入数据操作中心</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+  <script src="/webjars/jquery/3.6.1/jquery.min.js"></script>
+  <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src = "daliy.js">
+  </script>
+</head>
+<body>
+
+<div class="container"><br/><br/>
+  <div>
+  <form action="/importDaliy" method="post" enctype="multipart/form-data"><!--enctype="multipart/form-data"是必须的-->
+    <br><br><br>
+    <test>选择你的表格</test>
+    <br><br>
+    <input type="file" name="file"><br><br>
+    <input type="submit" id="btnSub" value="正式提交">
+  </form>
+  </div>
+  <br><br>
+  <input type="button" id="backupsd" value="手动备份按钮" onclick="queren()" >
+  <br/>
+  <br/>
+  <br/>
+  <input type="text" id="yearNumb">
+  <input type="button" id="clearTable" value="清理表格数据" onclick="clearTable()">
+  <div class="alert alert-success">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+    Hello, <strong>???!</strong>
+  </div>
+</div>
+</body>
+</html>

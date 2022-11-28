@@ -1,9 +1,11 @@
 package com.example.dailyeconomicflow.pojo;
 
 public class ReturnInfo {
-
+    //传递用的标识 正常的话都是 0 ,有问题就变成 1
     private Integer retFlag;
+    //传递用的信息
     private String retMsg;
+    //传递用的参数
     private Object retVal;
 
     public ReturnInfo(Integer retFlag, String retMsg, Object retVal) {

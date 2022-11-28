@@ -14,5 +14,12 @@
         insert into ${tableName} (SELECT * FROM tally_main) ;
     </insert>
 
+    <delete id="clearTableByYearTool">
+        DELETE
+        FROM
+            tally_main t
+        WHERE
+            YEAR ( t.trading_time ) = ${yearInt}
+    </delete>
 
 </mapper>
